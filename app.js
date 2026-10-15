@@ -1,5 +1,21 @@
 "use strict";
 
+const countdown = document.querySelector("#countdown");
+if (countdown) {
+  const eventDate = new Date(countdown.dataset.event).getTime();
+  const parts = Object.fromEntries(["days", "hours", "minutes", "seconds"].map(part => [part, countdown.querySelector(`[data-part='${part}']`)]));
+  const note = document.querySelector("#countdown-note");
+  let timer;
+  const updateCountdown = () => {
+    const remaining = Math.max(0, eventDate - Date.now());
+    const totalSeconds = Math.floor(remaining / 1000);
+    const values = { days: Math.floor(totalSeconds / 86400), hours: Math.floor((totalSeconds % 86400) / 3600), minutes: Math.floor((totalSeconds % 3600) / 60), seconds: totalSeconds % 60 };
+    for (const [key, value] of Object.entries(values)) parts[key].textContent = String(value).padStart(2, "0");
+    if (remaining === 0) { note.textContent = "La celebración es hoy. ¡Nos vemos en la mesa!"; clearInterval(timer); }
+  };
+  updateCountdown(); timer = setInterval(updateCountdown, 1000);
+}
+
 const form = document.querySelector("#rsvp-form");
 const status = document.querySelector("#form-status");
 const submit = document.querySelector("#submit-button");

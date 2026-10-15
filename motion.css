@@ -1,8 +1,7 @@
 .motion-word{display:inline-block;white-space:nowrap}
 .motion-unit{display:inline-block}
 .motion-letter{transition:translate .28s cubic-bezier(.2,.8,.2,1),color .28s}
-.art .glasses,.art .art-star{animation-play-state:paused}
-.art.art-visible .glasses,.art.art-visible .art-star{animation-play-state:running}
+.art .glasses,.art .art-star{animation-play-state:running}
 .glasses>g>g{transform-box:view-box;transform-origin:155px 355px;animation:toast-left 4.2s cubic-bezier(.45,0,.25,1) infinite;animation-play-state:paused}
 .glasses>g>g:nth-child(2){transform-origin:255px 377px;animation-name:toast-right}
 .art-visible .glasses>g>g{animation-play-state:running}

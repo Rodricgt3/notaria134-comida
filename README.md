@@ -47,6 +47,14 @@ El repositorio de esta carpeta es `Rodricgt3/notaria134-comida`.
 
 GitHub Pages aloja la invitación; Apps Script escribe en Sheets. No hay contraseñas ni claves privadas en el sitio. La URL de Apps Script es pública por diseño.
 
+### Vista previa al compartir en WhatsApp
+
+WhatsApp guarda la vista previa en caché. Después de publicar los cambios, comparte esta URL pública exacta en un chat nuevo:
+
+`https://rodricgt3.github.io/notaria134-comida/`
+
+Si todavía aparece la tarjeta vieja, elimina el mensaje anterior y vuelve a pegar el enlace. La imagen debe estar publicada en esa misma ruta para que WhatsApp pueda descargarla.
+
 ## Datos y funcionamiento
 
 Se registran fecha (Ciudad de México), nombre obligatorio, comentario opcional, estado e identificador de envío. El servidor valida longitudes, neutraliza fórmulas y bloquea escrituras simultáneas. Reintentar el mismo envío no duplica la fila. Un nuevo envío después de recargar sí puede crear otra fila; no se identifica a las personas por nombre. El campo trampa es una protección básica contra bots, no contra abuso avanzado. No hay endpoint para leer nombres o alergias desde la invitación.
