@@ -1,0 +1,10 @@
+{
+  "name": "Notaría 134 · Comida de fin de año",
+  "short_name": "Notaría 134",
+  "description": "Invitación a la comida de fin de año de Notaría 134.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f5ee",
+  "theme_color": "#173d32",
+  "icons": [{ "src": "assets/social-preview.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }]
+}
