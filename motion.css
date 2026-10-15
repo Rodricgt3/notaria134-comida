@@ -1,0 +1,27 @@
+.motion-word{display:inline-block;white-space:nowrap}
+.motion-unit{display:inline-block}
+.motion-letter{transition:translate .28s cubic-bezier(.2,.8,.2,1),color .28s}
+.art .glasses,.art .art-star{animation-play-state:paused}
+.art.art-visible .glasses,.art.art-visible .art-star{animation-play-state:running}
+.art-visible .glasses>g>g{transform-box:fill-box;transform-origin:center bottom;animation:toast-sway 5s ease-in-out infinite alternate}
+.art-visible .glasses>g>g:nth-child(2){animation-direction:alternate-reverse;animation-delay:-1s}
+.venue-art svg{transition:translate 1s cubic-bezier(.16,1,.3,1)}
+.venue-art.art-visible svg path{animation:house-draw 2.8s cubic-bezier(.22,1,.36,1) both}
+.venue-art.art-visible svg path:nth-child(2){animation-delay:.25s}
+.button{position:relative;overflow:hidden}
+.button::after{content:"";position:absolute;inset:-50% auto -50% -70%;width:35%;background:linear-gradient(90deg,transparent,#fff4,transparent);transform:skewX(-20deg);pointer-events:none}
+.button:active{scale:.97}
+.button span{transition:translate .3s}
+@media(hover:hover) and (pointer:fine){
+  .motion-letter:hover{translate:0 -5px;color:#ae8a4b}
+  .button:hover::after{animation:button-glint .7s ease-out}
+  .button:hover span{translate:3px -3px}
+  .venue-art:hover svg{translate:0 -7px}
+}
+@keyframes toast-sway{from{rotate:-2deg}to{rotate:2deg}}
+@keyframes house-draw{from{stroke-dasharray:1;stroke-dashoffset:1;opacity:.2}to{stroke-dasharray:1;stroke-dashoffset:0;opacity:1}}
+@keyframes button-glint{to{left:140%}}
+@media(prefers-reduced-motion:reduce){
+  .motion-unit,.motion-letter,.venue-art svg{animation:none!important;transition:none!important;transform:none!important;translate:none!important;filter:none!important;opacity:1!important}
+  .art-visible .glasses>g>g,.venue-art.art-visible svg path,.button::after{animation:none!important}
+}
