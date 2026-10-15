@@ -1,31 +1,10 @@
 "use strict";
 (() => {
-  const preference = matchMedia("(prefers-reduced-motion: reduce)");
-  const explicitMotion = new URLSearchParams(location.search).has('animaciones');
-  if (explicitMotion) document.documentElement.classList.add('force-motion');
-  if (preference.matches && !explicitMotion) {
-    const button = document.createElement('a');
-    button.className = 'button button-gold';
-    button.href = '?animaciones=si';
-    button.textContent = 'Activar animaciones';
-    document.querySelector('.hero-copy').append(button);
-    return;
-  }
-  if (explicitMotion) {
-    for (const sheet of document.styleSheets) {
-      try {
-        for (const rule of sheet.cssRules) {
-          if (rule.media?.mediaText.includes('prefers-reduced-motion: reduce') || rule.media?.mediaText.includes('prefers-reduced-motion:reduce')) rule.media.mediaText = 'not all';
-        }
-      } catch { /* External font stylesheets are not editable. */ }
-    }
-  }
   if (!window.IntersectionObserver || !Element.prototype.animate) return;
   const active = new Set();
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
-      if (preference.matches && !explicitMotion) continue;
       entry.target.querySelectorAll(".motion-unit").forEach((unit, index, units) => {
         const letters = entry.target.matches("h1,h2,h3");
         const animation = unit.animate([
@@ -72,8 +51,5 @@
   document.querySelectorAll(".art,.venue-art").forEach(element => artObserver.observe(element));
   document.querySelectorAll(".venue-art svg path").forEach(path => {
     path.setAttribute("pathLength", "1");
-  });
-  preference.addEventListener("change", event => {
-    if (event.matches) { active.forEach(animation => animation.cancel()); observer.disconnect(); }
   });
 })();

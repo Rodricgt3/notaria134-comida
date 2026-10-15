@@ -24,7 +24,3 @@
 @keyframes clink-flash{0%,25%,65%,100%{opacity:0;transform:translateY(20px) scale(.7)}35%,45%{opacity:1;transform:translateY(12px) scale(1.3)}}
 @keyframes house-draw{from{stroke-dasharray:1;stroke-dashoffset:1;opacity:.2}to{stroke-dasharray:1;stroke-dashoffset:0;opacity:1}}
 @keyframes button-glint{to{left:140%}}
-@media(prefers-reduced-motion:reduce){
-  .motion-unit,.motion-letter,.venue-art svg{animation:none!important;transition:none!important;transform:none!important;translate:none!important;filter:none!important;opacity:1!important}
-  .glasses>g>g,.art-visible .glasses>g>path,.venue-art.art-visible svg path,.button::after{animation:none!important}
-}
