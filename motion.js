@@ -2,6 +2,7 @@
 (() => {
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
   const explicitMotion = new URLSearchParams(location.search).has('animaciones');
+  if (explicitMotion) document.documentElement.classList.add('force-motion');
   if (preference.matches && !explicitMotion) {
     const button = document.createElement('a');
     button.className = 'button button-gold';
