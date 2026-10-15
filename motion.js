@@ -1,19 +1,36 @@
 "use strict";
 (() => {
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
-  if (preference.matches || !window.IntersectionObserver || !Element.prototype.animate) return;
+  const explicitMotion = new URLSearchParams(location.search).has('animaciones');
+  if (preference.matches && !explicitMotion) {
+    const button = document.createElement('a');
+    button.className = 'button button-gold';
+    button.href = '?animaciones=si';
+    button.textContent = 'Activar animaciones';
+    document.querySelector('.hero-copy').append(button);
+    return;
+  }
+  if (explicitMotion) {
+    for (const sheet of document.styleSheets) {
+      try {
+        for (const rule of sheet.cssRules) {
+          if (rule.media?.mediaText.includes('prefers-reduced-motion: reduce') || rule.media?.mediaText.includes('prefers-reduced-motion:reduce')) rule.media.mediaText = 'not all';
+        }
+      } catch { /* External font stylesheets are not editable. */ }
+    }
+  }
+  if (!window.IntersectionObserver || !Element.prototype.animate) return;
   const active = new Set();
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
-      observer.unobserve(entry.target);
-      if (preference.matches) continue;
+      if (preference.matches && !explicitMotion) continue;
       entry.target.querySelectorAll(".motion-unit").forEach((unit, index, units) => {
         const letters = entry.target.matches("h1,h2,h3");
         const animation = unit.animate([
-          { opacity: 0, transform: `translateY(${letters ? 24 : -12}px)`, filter: `blur(${letters ? 0 : 5}px)` },
+          { opacity: 0, transform: `translateY(${letters ? 40 : -24}px)`, filter: `blur(${letters ? 3 : 8}px)` },
           { opacity: 1, transform: "translateY(0)", filter: "blur(0)" }
-        ], { duration: letters ? 850 : 700, delay: index * Math.min(letters ? 28 : 65, 700 / units.length), easing: "cubic-bezier(.16,1,.3,1)", fill: "backwards" });
+        ], { duration: letters ? 1200 : 1000, delay: 180 + index * Math.min(letters ? 40 : 90, 950 / units.length), easing: "cubic-bezier(.16,1,.3,1)", fill: "backwards" });
         active.add(animation);
         animation.finished.then(() => active.delete(animation)).catch(() => active.delete(animation));
       });

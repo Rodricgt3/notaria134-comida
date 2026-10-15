@@ -3,8 +3,10 @@
 .motion-letter{transition:translate .28s cubic-bezier(.2,.8,.2,1),color .28s}
 .art .glasses,.art .art-star{animation-play-state:paused}
 .art.art-visible .glasses,.art.art-visible .art-star{animation-play-state:running}
-.art-visible .glasses>g>g{transform-box:fill-box;transform-origin:center bottom;animation:toast-sway 5s ease-in-out infinite alternate}
-.art-visible .glasses>g>g:nth-child(2){animation-direction:alternate-reverse;animation-delay:-1s}
+.glasses>g>g{transform-box:view-box;transform-origin:155px 355px;animation:toast-left 4.2s cubic-bezier(.45,0,.25,1) infinite;animation-play-state:paused}
+.glasses>g>g:nth-child(2){transform-origin:255px 377px;animation-name:toast-right}
+.art-visible .glasses>g>g{animation-play-state:running}
+.art-visible .glasses>g>path{animation:clink-flash 4.2s ease-in-out infinite;transform-origin:200px 35px}
 .venue-art svg{transition:translate 1s cubic-bezier(.16,1,.3,1)}
 .venue-art.art-visible svg path{animation:house-draw 2.8s cubic-bezier(.22,1,.36,1) both}
 .venue-art.art-visible svg path:nth-child(2){animation-delay:.25s}
@@ -18,10 +20,12 @@
   .button:hover span{translate:3px -3px}
   .venue-art:hover svg{translate:0 -7px}
 }
-@keyframes toast-sway{from{rotate:-2deg}to{rotate:2deg}}
+@keyframes toast-left{0%,100%{transform:translate(-15px,6px) rotate(-13deg)}35%{transform:translate(10px,-12px) rotate(6deg)}44%{transform:translate(7px,-9px) rotate(3deg)}54%{transform:translate(10px,-12px) rotate(5deg)}75%{transform:translate(-8px,0) rotate(-10deg)}}
+@keyframes toast-right{0%,100%{transform:translate(15px,6px) rotate(13deg)}35%{transform:translate(-10px,-24px) rotate(-6deg)}44%{transform:translate(-7px,-20px) rotate(-3deg)}54%{transform:translate(-10px,-24px) rotate(-5deg)}75%{transform:translate(8px,0) rotate(10deg)}}
+@keyframes clink-flash{0%,25%,65%,100%{opacity:0;transform:translateY(20px) scale(.7)}35%,45%{opacity:1;transform:translateY(12px) scale(1.3)}}
 @keyframes house-draw{from{stroke-dasharray:1;stroke-dashoffset:1;opacity:.2}to{stroke-dasharray:1;stroke-dashoffset:0;opacity:1}}
 @keyframes button-glint{to{left:140%}}
 @media(prefers-reduced-motion:reduce){
   .motion-unit,.motion-letter,.venue-art svg{animation:none!important;transition:none!important;transform:none!important;translate:none!important;filter:none!important;opacity:1!important}
-  .art-visible .glasses>g>g,.venue-art.art-visible svg path,.button::after{animation:none!important}
+  .glasses>g>g,.art-visible .glasses>g>path,.venue-art.art-visible svg path,.button::after{animation:none!important}
 }
