@@ -23,11 +23,18 @@ function configurar() {
   console.log('Tu hoja de confirmaciones: ' + spreadsheet.getUrl());
 }
 
-function doGet() {
-  return respuesta_({ ok: true, service: 'Confirmaciones Notaría 134' });
+function doGet(e) {
+  if (!e || !e.parameter || !e.parameter.fullName) {
+    return respuesta_({ ok: true, service: 'Confirmaciones Notaría 134' });
+  }
+  return guardar_(e);
 }
 
 function doPost(e) {
+  return guardar_(e);
+}
+
+function guardar_(e) {
   var lock = LockService.getScriptLock();
   try {
     var p = e && e.parameter ? e.parameter : {};

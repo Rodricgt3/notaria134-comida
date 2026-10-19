@@ -47,7 +47,7 @@ form.addEventListener("submit", async (event) => {
   status.textContent = "Estamos reservando tu lugar. Espera un momento.";
   try {
     const transport = document.createElement("form");
-    transport.method = "POST";
+    transport.method = "GET";
     transport.action = endpoint;
     transport.target = "rsvp-transport";
     transport.hidden = true;
