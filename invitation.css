@@ -1,0 +1,8 @@
+.invitation-host{font:400 clamp(18px,2vw,25px)/1.6 var(--serif);color:#e2e7f0;margin:28px 0 12px}
+.invitation-host strong{font-weight:600;color:var(--gold)}
+.hero h1{font-size:clamp(54px,6vw,88px);line-height:1.04;margin:15px 0 26px}
+.venue-media{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:28px;background:#162b49}
+.venue-media .eyebrow{margin:0;text-align:center}
+.venue-media video{display:block;width:100%;height:auto;max-height:480px;object-fit:contain;background:#0d1c33;border-radius:6px}
+.venue-media>a{font-size:12px;text-align:center;color:#e2cfaa;padding:12px}
+@media(max-width:680px){.hero h1{font-size:clamp(45px,12.5vw,64px)}.invitation-host{font-size:21px}.venue-media{padding:20px 14px}.venue-media video{max-height:420px}}

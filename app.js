@@ -32,18 +32,17 @@ form.addEventListener("submit", async (event) => {
     return;
   }
   const fullName = form.elements.fullName.value.trim().replace(/\s+/g, " ");
-  const notes = form.elements.notes.value.trim();
   if (fullName.length < 3) {
     status.textContent = "Escribe tu nombre completo para continuar.";
     form.elements.fullName.focus();
     return;
   }
-  const signature = JSON.stringify({ fullName, notes });
+  const signature = JSON.stringify({ fullName });
   if (pendingPayload !== signature) {
     pendingPayload = signature;
     pendingId = crypto.randomUUID();
   }
-  const payload = new URLSearchParams({ fullName, notes, requestId: pendingId, website: form.elements.website.value });
+  const payload = new URLSearchParams({ fullName, requestId: pendingId, website: form.elements.website.value });
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 25000);
   submit.disabled = true;

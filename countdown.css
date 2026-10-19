@@ -3,7 +3,7 @@
   width: 100%;
   padding: clamp(40px, 6vw, 72px) 18px !important;
   margin: 0 !important;
-  background: #e9ebdf;
+  background: #e8ecf2;
   text-align: center;
   border-bottom: 1px solid var(--line);
 }
@@ -18,7 +18,7 @@
   margin: 0 auto !important;
 }
 #countdown > i {display:none;}
-#event-countdown .time-unit {min-width:0;padding:20px 4px;background:#f7f5ee;border:1px solid #d2d8c9;border-radius:12px;text-align:center;}
+#event-countdown .time-unit {min-width:0;padding:20px 4px;background:#f7f5ee;border:1px solid #cdd5e0;border-radius:12px;text-align:center;}
 #event-countdown .time-unit strong {display:block;font:500 clamp(32px, 8vw, 64px)/1.1 var(--serif) !important;letter-spacing:0;font-variant-numeric:tabular-nums;}
 #event-countdown .time-unit span {display:block;font:500 clamp(8px, 1.8vw, 11px)/1.4 var(--sans);letter-spacing:1px;margin-top:10px;}
 #event-countdown #countdown-note {max-width:none !important;width:100%;margin:22px auto 0 !important;font-size:12px;line-height:1.6;text-align:center;}
