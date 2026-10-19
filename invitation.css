@@ -1,5 +1,16 @@
 .invitation-host{font:400 clamp(18px,2vw,25px)/1.6 var(--serif);color:#e2e7f0;margin:28px 0 12px}
 .invitation-host strong{font-weight:600;color:var(--gold)}
+.details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;padding:64px max(24px,6%);background:var(--paper);border-bottom:0}
+.details>.event-card{position:relative;min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:38px 20px;min-height:280px;text-align:center;border:1px solid #d9c9a6;border-radius:14px;background:#fffdf7;box-shadow:0 12px 30px #162b4907}
+.details>.event-card-featured{background:#162b49;color:#fff5e0;border-color:#162b49}
+.details .detail-index{font-size:11px;letter-spacing:2.5px;color:#8c7546}
+.details .event-symbol{font:32px Georgia,serif;color:#b59b65;margin:18px 0 8px}
+.details h2{font:500 clamp(28px,2.8vw,46px)/1.08 var(--serif);margin:12px 0 16px}
+.details p,.details a{font-size:14px;line-height:1.7;color:#647084}
+.details a{padding:10px 0;text-decoration:underline;text-underline-offset:5px}
+.details .event-card-featured .detail-index,.details .event-card-featured .event-symbol{color:var(--gold)}
+.details .event-card-featured p{color:#d4deed}
+@media(max-width:680px){.details{grid-template-columns:minmax(0,1fr);gap:16px;padding:32px 18px}.details>.event-card{padding:28px 18px;min-height:220px}.details h2{font-size:36px}.details .detail-index{grid-row:auto}.details .event-symbol{margin:12px 0 0}}
 .hero h1{font-size:clamp(54px,6vw,88px);line-height:1.04;margin:15px 0 26px}
 .venue-media{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:28px;background:#162b49}
 .venue-media .eyebrow{margin:0;text-align:center}
