@@ -29,6 +29,8 @@ El código crea una hoja privada en tu cuenta. No necesitas compartirla con los 
 11. Abre `config.js` de esta carpeta y pega esa URL entre las comillas vacías de `appsScriptUrl`. Guarda. No pegues la URL de la hoja.
 12. Recarga la invitación y envía un registro de prueba. Deben aparecer la pantalla de éxito y una fila en Sheets. Después elimina esa fila de prueba.
 
+El formulario actual solo envía `fullName`, `requestId` y el campo técnico antispam. No solicita ni envía sugerencias, alergias u observaciones. El Apps Script sigue aceptando un valor vacío en la columna de observaciones para conservar compatibilidad con una hoja ya creada.
+
 Sin conexión configurada, el sitio informa que las confirmaciones aún no están habilitadas. La integración real debe probarse después de implementar Apps Script en tu cuenta.
 
 Si cambias Apps Script después: **Implementar → Gestionar implementaciones → Editar → Nueva versión → Implementar**. Conserva la misma URL.
