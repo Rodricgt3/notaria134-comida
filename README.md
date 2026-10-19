@@ -1,6 +1,6 @@
 # Invitación · Notaría 134
 
-Comida de fin de año: **viernes 11 de diciembre de 2026**, **desde las 3:00 p. m.**, Hacienda las Campanas, Tlalpan, CDMX.
+Comida de fin de año: **viernes 11 de diciembre de 2026**, **3:00 p. m.**, Hacienda las Campanas, Tlalpan, CDMX.
 
 Sitio estático para GitHub Pages. HTML, CSS y JavaScript sin frameworks ni instalación de dependencias. Ilustraciones SVG, diseño adaptable y animaciones que respetan la preferencia de movimiento reducido. Las fuentes se descargan de Google Fonts, con fuentes del sistema como respaldo.
 
