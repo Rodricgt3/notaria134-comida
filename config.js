@@ -1,3 +1,3 @@
 window.INVITATION_CONFIG = Object.freeze({
-  appsScriptUrl: "https://script.google.com/macros/s/AKfycbwSjVu3lSvIrmwGYnwY6dMzm8MExmXkm2qblG_FCem4PzTprdUHk3qJzFSpiksI_4_8/exec"
+  appsScriptUrl: "https://script.google.com/macros/s/AKfycbxN1yjKXnk9uZPvOO8OK84w_R3tRA25RKnZJlCJJ3JPRkNoPPNk5Jk021BBAlgLXk65/exec"
 });
