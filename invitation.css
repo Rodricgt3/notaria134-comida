@@ -6,3 +6,13 @@
 .venue-media video{display:block;width:100%;height:auto;max-height:480px;object-fit:contain;background:#0d1c33;border-radius:6px}
 .venue-media>a{font-size:12px;text-align:center;color:#e2cfaa;padding:12px}
 @media(max-width:680px){.hero h1{font-size:clamp(45px,12.5vw,64px)}.invitation-host{font-size:21px}.venue-media{padding:20px 14px}.venue-media video{max-height:420px}}
+.eyebrow>span.motion-word{width:auto;height:auto;background:none;margin:0;vertical-align:baseline}
+@media(min-width:1000px){
+  .venue{width:88%;max-width:1580px}
+  .rsvp{max-width:1680px;padding-inline:6%}
+  .venue-copy{padding:56px 7%}
+  .venue-copy p:not(.eyebrow){font-size:clamp(18px,1.3vw,24px);line-height:1.7}
+  .eyebrow,.detail-index{font-size:12px;letter-spacing:2px}
+  .intro,.rsvp-copy>p:not(.eyebrow){font-size:18px}
+  .venue-copy>small,.form-subtitle{font-size:14px;line-height:1.6}
+}

@@ -46,30 +46,25 @@ form.addEventListener("submit", async (event) => {
   submit.textContent = "Guardando tu confirmación…";
   status.textContent = "Estamos reservando tu lugar. Espera un momento.";
   try {
-    const transport = document.createElement("form");
-    transport.method = "GET";
-    transport.action = endpoint;
-    transport.target = "rsvp-transport";
-    transport.hidden = true;
-    for (const [name, value] of Object.entries({ fullName, requestId: pendingId, website: form.elements.website.value })) {
-      const field = document.createElement("input");
-      field.type = "hidden";
-      field.name = name;
-      field.value = value;
-      transport.append(field);
-    }
-    document.body.append(transport);
-    transport.submit();
-    window.setTimeout(() => transport.remove(), 4000);
-    await new Promise(resolve => setTimeout(resolve, 700));
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 30000);
+    let result;
+    try {
+      const response = await fetch(endpoint, { method: 'POST', body: new URLSearchParams({ fullName, requestId: pendingId, website: form.elements.website.value }), signal: controller.signal, credentials: 'omit' });
+      if (!response.ok) throw new Error('No fue posible contactar con el registro.');
+      result = await response.json();
+      if (!result.ok) throw new Error(result.error || 'No se pudo guardar tu nombre.');
+      if (result.requestId !== pendingId) throw new Error('No se pudo verificar tu registro.');
+    } finally { clearTimeout(timeout); }
     form.hidden = true;
     const success = document.querySelector("#success");
     success.hidden = false;
+    success.querySelector('h3').textContent = result.duplicate ? 'Tu asistencia ya está registrada.' : '¡Tu asistencia quedó confirmada!';
     document.querySelector("#success-name").textContent = fullName;
     success.setAttribute("tabindex", "-1");
     success.focus();
-  } catch {
-    status.textContent = "No pudimos enviar la confirmación. Revisa tu conexión e inténtalo de nuevo.";
+  } catch (error) {
+    status.textContent = 'No se ha podido verificar la confirmación. ' + (error.name === 'AbortError' ? 'El servicio tardó demasiado. Intenta nuevamente.' : error.message);
   } finally {
     submit.disabled = false;
     submit.innerHTML = 'Confirmar mi asistencia <span aria-hidden="true">↗</span>';

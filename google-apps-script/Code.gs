@@ -24,10 +24,7 @@ function configurar() {
 }
 
 function doGet(e) {
-  if (!e || !e.parameter || !e.parameter.fullName) {
-    return respuesta_({ ok: true, service: 'Confirmaciones Notaría 134' });
-  }
-  return guardar_(e);
+  return respuesta_({ ok: true, service: 'Confirmaciones Notaría 134', version: 2, configured: !!PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID') });
 }
 
 function doPost(e) {
@@ -46,17 +43,18 @@ function guardar_(e) {
     }
     if (!lock.tryLock(15000)) return respuesta_({ ok: false, error: 'Intenta de nuevo en unos segundos.' });
     var id = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
-    if (!id) throw new Error('Ejecuta configurar antes de publicar.');
+    if (!id) return respuesta_({ ok: false, error: 'El organizador debe ejecutar configurar en Apps Script antes de habilitar los registros.' });
     var sheet = SpreadsheetApp.openById(id).getSheetByName('Confirmaciones');
     if (!sheet) throw new Error('No existe la hoja de confirmaciones.');
     var lastRow = sheet.getLastRow();
     var existing = lastRow > 1 && sheet.getRange(2, 5, lastRow - 1, 1)
       .createTextFinder(requestId).matchEntireCell(true).findNext();
-    if (!existing) {
+    var duplicate = lastRow > 1 && sheet.getRange(2, 2, lastRow - 1, 1).getDisplayValues().some(function(row) { return nombreClave_(row[0]) === nombreClave_(name); });
+    if (!existing && !duplicate) {
       sheet.appendRow([new Date(), textoSeguro_(name), textoSeguro_(notes), 'Confirmado', requestId]);
       SpreadsheetApp.flush();
     }
-    return respuesta_({ ok: true, requestId: requestId });
+    return respuesta_({ ok: true, requestId: requestId, duplicate: !!duplicate });
   } catch (error) {
     console.error(error);
     return respuesta_({ ok: false, error: 'No fue posible guardar la confirmación.' });
@@ -67,6 +65,10 @@ function guardar_(e) {
 
 function textoSeguro_(value) {
   return /^[=+@\-\t\r\n]/.test(value) ? "'" + value : value;
+}
+
+function nombreClave_(value) {
+  return String(value).replace(/^'/, '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, ' ');
 }
 
 function respuesta_(data) {
