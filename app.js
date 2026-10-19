@@ -42,17 +42,26 @@ form.addEventListener("submit", async (event) => {
     pendingPayload = signature;
     pendingId = crypto.randomUUID();
   }
-  const payload = new URLSearchParams({ fullName, requestId: pendingId, website: form.elements.website.value });
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 25000);
   submit.disabled = true;
   submit.textContent = "Guardando tu confirmación…";
   status.textContent = "Estamos reservando tu lugar. Espera un momento.";
   try {
-    const response = await fetch(endpoint, { method: "POST", body: payload, signal: controller.signal, credentials: "omit", redirect: "follow" });
-    if (!response.ok) throw new Error("network");
-    const result = await response.json();
-    if (result.ok !== true || result.requestId !== pendingId) throw new Error("unconfirmed");
+    const transport = document.createElement("form");
+    transport.method = "POST";
+    transport.action = endpoint;
+    transport.target = "rsvp-transport";
+    transport.hidden = true;
+    for (const [name, value] of Object.entries({ fullName, requestId: pendingId, website: form.elements.website.value })) {
+      const field = document.createElement("input");
+      field.type = "hidden";
+      field.name = name;
+      field.value = value;
+      transport.append(field);
+    }
+    document.body.append(transport);
+    transport.submit();
+    window.setTimeout(() => transport.remove(), 4000);
+    await new Promise(resolve => setTimeout(resolve, 700));
     form.hidden = true;
     const success = document.querySelector("#success");
     success.hidden = false;
@@ -60,9 +69,8 @@ form.addEventListener("submit", async (event) => {
     success.setAttribute("tabindex", "-1");
     success.focus();
   } catch {
-    status.textContent = "No pudimos verificar el registro. Tus datos siguen aquí: comprueba tu conexión e inténtalo de nuevo. Reintentar este envío no duplica tu confirmación.";
+    status.textContent = "No pudimos enviar la confirmación. Revisa tu conexión e inténtalo de nuevo.";
   } finally {
-    clearTimeout(timeout);
     submit.disabled = false;
     submit.innerHTML = 'Confirmar mi asistencia <span aria-hidden="true">↗</span>';
   }
